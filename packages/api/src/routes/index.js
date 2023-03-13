@@ -6,6 +6,7 @@ const { userRouter } = require(`./user`);
 const router = express.Router();
 
 router.use(`/ping`, pingRouter);
+router.post(`/assessment/submit`, assessmentRouter);
 router.use(`/assessment`, assessmentRouter);
 router.use(`/user`, userRouter);
 

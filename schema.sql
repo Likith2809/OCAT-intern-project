@@ -63,3 +63,5 @@ ALTER TABLE ONLY public.assessments
 -- PostgreSQL database dump complete
 --
 
+ALTER TABLE ONLY public.assessments ALTER COLUMN instrument_type TYPE text;
+
