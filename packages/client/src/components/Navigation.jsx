@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import { alignPropType } from 'react-bootstrap/esm/types';
 
 export const Navigation = () =>
   <header>
@@ -11,6 +12,10 @@ export const Navigation = () =>
           <Nav className="me-auto">
             <Nav.Link href="/">Dashboard</Nav.Link>
             <Nav.Link href="/assessment/new">New Assessment</Nav.Link>
+            <Nav.Link href="/assessment/list">Assessment List</Nav.Link>
+          </Nav>
+          <Nav className="ms-auto">
+            <Nav.Link href="/user/login" >LOGIN</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

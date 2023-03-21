@@ -1,4 +1,4 @@
-
+/* eslint-disable sort-keys */
 import {
   CreationOptional,
   DataTypes,
@@ -8,23 +8,22 @@ import {
   Sequelize,
 } from 'sequelize';
 
-export class Assessment extends Model<
-InferAttributes<Assessment>,
-InferCreationAttributes<Assessment>
+export class User extends Model<
+InferAttributes<User>,
+InferCreationAttributes<User>
 > {
   declare public id: CreationOptional<number>;
-  declare public instrumentType: string;
-  declare public score: number;
-  declare public riskLevel: string;
-  declare public catName: string;
-  declare public catDateOfBirth: string;
+  declare public firstName: string;
+  declare public lastName: string;
+  declare public userName: string;
+  declare public userPassword: string;
+  declare public isSupervisor: boolean;
   declare public createdAt: CreationOptional<Date>;
   declare public updatedAt: CreationOptional<Date>;
   declare public deletedAt: Date | null;
 
-  public static initModel(sequelize: Sequelize): typeof Assessment {
-    Assessment.init({
-      /* eslint-disable sort-keys */
+  public static initModel(sequelize: Sequelize): typeof User {
+    User.init({
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -33,25 +32,25 @@ InferCreationAttributes<Assessment>
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      instrumentType: {
+      firstName: {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      score: {
-        allowNull: false,
-        type: DataTypes.INTEGER,
-      },
-      riskLevel: {
+      lastName: {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      catName: {
+      userName: {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      catDateOfBirth: {
+      userPassword: {
         allowNull: false,
-        type: DataTypes.DATEONLY,
+        type: DataTypes.STRING,
+      },
+      isSupervisor: {
+        allowNull: false,
+        type: DataTypes.BOOLEAN,
       },
       createdAt: {
         allowNull: false,
@@ -64,13 +63,9 @@ InferCreationAttributes<Assessment>
       deletedAt: {
         type: DataTypes.DATE,
       },
-      /* eslint-enable sort-keys */
     }, {
       sequelize,
-      // eslint-disable-next-line sort-keys
-      paranoid: true,
     });
-
-    return Assessment;
+    return User;
   }
 }

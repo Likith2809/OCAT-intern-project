@@ -1,4 +1,4 @@
-/* eslint-disable require-await */
+
 /* eslint-disable no-console */
 const { AssessmentService } = require(`../microservices`);
 const { ResponseHandler } = require(`../utils`);
@@ -6,7 +6,6 @@ const { ResponseHandler } = require(`../utils`);
 const { Router } = require(`express`);
 
 const assessmentRouter = Router();
-console.log(`hi`);
 assessmentRouter.post(
   `/assessment/submit`,
   async (req, res, next) => {
@@ -28,17 +27,34 @@ assessmentRouter.post(
 );
 
 assessmentRouter.get(
-  `/`,
+  `/assessment/list`,
   async (req, res, next) => {
     try {
       // verify that your data is making it here to the API by using console.log();
       // call the AssessmentService.getList function from packages/api/src/microservices/Assessment-Service.js
-      const assessments = [];
-
+      console.log(`hi`);
+      const assessments = await AssessmentService.getList();
       ResponseHandler(
         res,
         `Fetched assessments`,
-        { assessments },
+        assessments,
+      );
+    } catch (err) {
+      next(err);
+    }
+  },
+);
+
+assessmentRouter.delete(
+  `/assessment/delete/:id`,
+  async (req, res, next) => {
+    try {
+      console.log(req.params);
+      const result = await AssessmentService.deleteAssessment(req.params);
+      ResponseHandler(
+        res,
+        `Deleted Assessment`,
+        {},
       );
     } catch (err) {
       next(err);

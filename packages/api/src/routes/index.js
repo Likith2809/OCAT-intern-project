@@ -7,7 +7,10 @@ const router = express.Router();
 
 router.use(`/ping`, pingRouter);
 router.post(`/assessment/submit`, assessmentRouter);
+router.get(`/assessment/list`, assessmentRouter);
 router.use(`/assessment`, assessmentRouter);
 router.use(`/user`, userRouter);
+router.post(`/user/login`, userRouter);
+router.delete(`/assessment/delete/:id`, assessmentRouter);
 
 module.exports = { router };

@@ -1,18 +1,14 @@
 /* eslint-disable sort-keys */
-import React, { useMemo } from 'react';
-import { Button, Form, FormLabel } from 'react-bootstrap';
+import React from 'react';
+import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AssessmentService } from '../../services/AssessmentService';
 
 export const NewAssessment = () => {
 
-  // const [ catName, setCatName ] = useState(``);
-  // const [ catDateOfBirth, setCatDateOfBirth ] = useState(``);
-  const [ responses, setResponses ] = useState(Array(5).fill(0));
-
   const { handleSubmit, register } = useForm();
-
+  const navigate = useNavigate();
   // create a form that utilizes the "onSubmit" function to send data to
   // packages/client/src/services/AssessmentService.js and then onto the packages/api/src/routes/assessment express API
   async function onSubmit(data) {
@@ -24,11 +20,11 @@ export const NewAssessment = () => {
     parseInt(data.radioOption5);
 
     let riskLevel = ``;
-    if (score < 1) {
+    if (score >= 0 & score <= 1) {
       riskLevel = `Low`;
-    } else if (score >= 3 & score <= 4) {
+    } else if (score >= 2 & score <= 3) {
       riskLevel = `Medium`;
-    } else if (score > 4 & score <= 5) {
+    } else if (score >= 4 & score <= 5) {
       riskLevel = `High`;
     }
 
@@ -45,6 +41,9 @@ export const NewAssessment = () => {
       createdAt,
       updatedAt,
     });
+
+    navigate(`/assessment/list`);
+
   }
 
   return <Form onSubmit={handleSubmit(onSubmit)}>
